@@ -6,18 +6,26 @@ import Error404 from "./pages/Error/Error404";
 import Home2 from "./pages/Home2";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import RestrictedPublicRoute from "./components/Routes/RestrictedPublicRoute";
+import Aside from "./layouts/Aside";
+import {useEffect} from "react";
+import AuthorizationAxios from "./hooks/AuthorizationAxios";
 
 function App() {
+  // useEffect(()=>{
+  //   AuthorizationAxios.get('https://jsonplaceholder.typicode.com/users').then(data=>console.log(data));
+  // },[])
     return (
         <Routes>
-            <Route exact={'/'} element={<RestrictedPublicRoute />}>
+            <Route exact path={'/'} element={<RestrictedPublicRoute />}>
                 <Route exact path={'/'} element={<Login/>}/>
             </Route>
+          <Route element={<Aside/>}>
             <Route exact path={'/home'} element={<Home/>}/>
             <Route exact path={'/home2'} element={<PrivateRoute />}>
                 <Route exact path={'/home2'} element={<Home2/>}/>
             </Route>
             <Route exact path={'*'} element={<Error404/>}/>
+          </Route>
         </Routes>
     );
 }
