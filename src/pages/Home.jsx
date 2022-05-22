@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../App.css';
 import logo from "../favicon.svg";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import AuthorizationAxios from "../hooks/AuthorizationAxios";
+import axios from "axios";
 
 function Home(props) {
+  useEffect(()=>{
+    AuthorizationAxios.get('https://jsonplaceholder.typicode.com/users/1').then(data=>console.log(data));
+    axios.get('https://jsonplaceholder.typicode.com/users/2').then(data=>console.log(data));
+  },[])
     //페이지 이동을 위해 UseNavigate 사용
     const navigate = useNavigate();
     localStorage.setItem('loginStatus','Y');
